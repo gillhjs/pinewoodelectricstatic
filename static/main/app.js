@@ -1,6 +1,6 @@
 'use strict';
 
-// ─── HEADER SCROLL ───────────────────────────────────
+// ─── HEADER SCROLL ────────────────────────────────────────────────
 const header = document.querySelector('.site-header');
 if (header) {
   window.addEventListener('scroll', () => {
@@ -8,7 +8,7 @@ if (header) {
   }, { passive: true });
 }
 
-// ─── HAMBURGER / MOBILE NAV ───────────────────────────
+// ─── HAMBURGER / MOBILE NAV ───────────────────────────────────────
 const hamburger = document.getElementById('hamburger');
 const mainNav   = document.getElementById('mainNav');
 
@@ -42,7 +42,7 @@ if (hamburger && mainNav) {
   });
 }
 
-// ─── ACTIVE NAV ───────────────────────────────────────
+// ─── ACTIVE NAV ───────────────────────────────────────────────────
 (function () {
   const page = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.main-nav a').forEach(a => {
@@ -50,19 +50,17 @@ if (hamburger && mainNav) {
   });
 })();
 
-// ─── FAQ ACCORDION ────────────────────────────────────
+// ─── FAQ ACCORDION ────────────────────────────────────────────────
 document.querySelectorAll('.faq-trigger').forEach(trigger => {
   trigger.addEventListener('click', () => {
     const item = trigger.closest('.faq-item');
     const isOpen = item.classList.contains('open');
-    // Close all
     document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    // Open this one if it wasn't open
     if (!isOpen) item.classList.add('open');
   });
 });
 
-// ─── REVEAL ON SCROLL ─────────────────────────────────
+// ─── REVEAL ON SCROLL ─────────────────────────────────────────────
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -80,7 +78,7 @@ document.querySelectorAll(
   revealObserver.observe(el);
 });
 
-// ─── COUNTER ANIMATION ────────────────────────────────
+// ─── COUNTER ANIMATION ────────────────────────────────────────────
 function countUp(el) {
   const text   = el.dataset.count || el.textContent.trim();
   const prefix = text.match(/^[^\d]*/)?.[0] || '';
@@ -114,7 +112,7 @@ const counterObs = new IntersectionObserver((entries) => {
 document.querySelectorAll('.metric-num, .hero-stat .num, .rstat .big, .about-img-badge .big')
   .forEach(el => { if (/\d/.test(el.textContent)) counterObs.observe(el); });
 
-// ─── LAZY IMAGES ──────────────────────────────────────
+// ─── LAZY IMAGES ──────────────────────────────────────────────────
 if ('IntersectionObserver' in window) {
   const lazyObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -128,7 +126,7 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('img[data-src]').forEach(img => lazyObs.observe(img));
 }
 
-// ─── SMOOTH ANCHOR SCROLL ─────────────────────────────
+// ─── SMOOTH ANCHOR SCROLL ─────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', function (e) {
     const t = document.querySelector(this.getAttribute('href'));
@@ -140,41 +138,119 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ─── PERF MARK ────────────────────────────────────────
-if (window.performance?.mark) window.performance.mark('app_ready');
+// ─── ANALYTICS: Phone & Email clicks ──────────────────────────────
 document.querySelectorAll('a[href^="tel:"]').forEach(a => {
   a.addEventListener('click', () => {
-    if (typeof gtag === 'function') gtag('event', 'phone_click', { event_category: 'engagement', event_label: a.href });
+    if (typeof gtag === 'function') gtag('event', 'phone_click', {
+      event_category: 'engagement',
+      event_label: a.href,
+      value: 1
+    });
   });
 });
+
 document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
   a.addEventListener('click', () => {
-    if (typeof gtag === 'function') gtag('event', 'email_click', { event_category: 'engagement' });
+    if (typeof gtag === 'function') gtag('event', 'email_click', {
+      event_category: 'engagement',
+      event_label: a.href
+    });
   });
 });
-document.querySelectorAll('a[href*="wa.me"], .whatsapp-btn').forEach(a => {
-  a.addEventListener('click', () => {
-    if (typeof gtag === 'function') gtag('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'WhatsApp Float Button' });
-  });
-});
+
+// ─── ANALYTICS: Sticky Call button ────────────────────────────────
 document.querySelectorAll('.sticky-call').forEach(a => {
   a.addEventListener('click', () => {
-    if (typeof gtag === 'function') gtag('event', 'sticky_call_click', { event_category: 'engagement', event_label: 'Sticky Call Mobile' });
+    if (typeof gtag === 'function') gtag('event', 'sticky_call_click', {
+      event_category: 'engagement',
+      event_label: 'Sticky Call Float Button',
+      value: 1
+    });
   });
 });
+
+// ─── ANALYTICS: CTA button clicks ─────────────────────────────────
 document.querySelectorAll('.btn-gold, .btn-nav, [class*="cta"]').forEach(btn => {
   btn.addEventListener('click', () => {
     const label = btn.textContent.trim().substring(0, 50);
-    if (typeof gtag === 'function') gtag('event', 'cta_click', { event_category: 'engagement', event_label: label });
+    if (typeof gtag === 'function') gtag('event', 'cta_click', {
+      event_category: 'engagement',
+      event_label: label
+    });
   });
 });
+
+// ─── ANALYTICS: Form submissions ──────────────────────────────────
 document.querySelectorAll('form').forEach(form => {
   form.addEventListener('submit', () => {
     const btn = form.querySelector('button[type="submit"]');
     if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; btn.style.opacity = '0.65'; }
-    if (typeof gtag === 'function') gtag('event', 'form_submit', { event_category: 'lead', event_label: document.title });
+    if (typeof gtag === 'function') gtag('event', 'form_submit', {
+      event_category: 'lead',
+      event_label: document.title,
+      value: 1
+    });
   });
 });
 
-// ─── PERF MARK ────────────────────────────────────────
+// ─── ANALYTICS: Scroll depth tracking ────────────────────────────
+(function () {
+  const depths = [25, 50, 75, 90];
+  const fired  = new Set();
+  window.addEventListener('scroll', () => {
+    const pct = Math.round(
+      (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+    );
+    depths.forEach(d => {
+      if (pct >= d && !fired.has(d)) {
+        fired.add(d);
+        if (typeof gtag === 'function') gtag('event', 'scroll_depth', {
+          event_category: 'engagement',
+          event_label: d + '%',
+          non_interaction: true
+        });
+      }
+    });
+  }, { passive: true });
+})();
+
+// ─── ANALYTICS: Time on page (30s, 60s, 120s milestones) ─────────
+(function () {
+  const milestones = [30, 60, 120];
+  milestones.forEach(sec => {
+    setTimeout(() => {
+      if (typeof gtag === 'function') gtag('event', 'time_on_page', {
+        event_category: 'engagement',
+        event_label: sec + 's',
+        non_interaction: true
+      });
+    }, sec * 1000);
+  });
+})();
+
+// ─── ANALYTICS: Outbound link clicks ──────────────────────────────
+document.querySelectorAll('a[href^="http"]').forEach(a => {
+  try {
+    if (new URL(a.href).hostname !== location.hostname) {
+      a.addEventListener('click', () => {
+        if (typeof gtag === 'function') gtag('event', 'outbound_click', {
+          event_category: 'engagement',
+          event_label: a.href
+        });
+      });
+    }
+  } catch(e) {}
+});
+
+// ─── ANALYTICS: Map / directions click ────────────────────────────
+document.querySelectorAll('a[href*="maps.google"]').forEach(a => {
+  a.addEventListener('click', () => {
+    if (typeof gtag === 'function') gtag('event', 'directions_click', {
+      event_category: 'engagement',
+      event_label: 'Google Maps directions'
+    });
+  });
+});
+
+// ─── PERF MARK ────────────────────────────────────────────────────
 if (window.performance?.mark) window.performance.mark('app_ready');
