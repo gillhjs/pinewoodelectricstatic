@@ -33,10 +33,11 @@
 </head>
 <body>
 
+<!-- ═══ HEADER ═══════════════════════════════════════════════════ -->
 <header class="site-header" role="banner">
   <div class="container nav-wrap">
     <a href="index.html" class="logo-link" aria-label="Pinewood Electrical Automation — Home">
-      <img src="static/main/images/logo.png" alt="Pinewood Electrical Automation" class="logo-img" width="140" height="34">
+      <img src="static/main/images/logo.png" alt="Pinewood Electrical Automation" class="logo-img" width="120" height="30">
       <div class="logo-name">
         <span class="logo-name-main">Pinewood Electrical</span>
         <span class="logo-name-sub">Automation Ltd.</span>
@@ -63,12 +64,13 @@
 
 <main id="main-content">
 
-<!-- HERO -->
+<!-- ═══ HERO ══════════════════════════════════════════════════════ -->
 <section class="hero" aria-labelledby="hero-h1">
   <div class="hero-grid-bg" aria-hidden="true"></div>
+
   <div class="hero-left">
     <div class="hero-badge"><span class="badge-dot"></span> Surrey, BC — Licensed &amp; Insured</div>
-    <div class="hero-company-name">Pinewood Electrical &amp; Automation</div>
+    <p class="hero-company-name">Pinewood Electrical &amp; Automation</p>
     <h1 id="hero-h1">Industrial Electrical &amp;<br><em>Automation</em> Built to Last</h1>
     <p class="hero-desc">We design, build, and integrate control systems and electrical infrastructure that reduce downtime, improve efficiency, and deliver code-compliant results — every time.</p>
     <div class="hero-actions">
@@ -76,22 +78,23 @@
       <a href="services.html" class="btn btn-ghost">Explore Services</a>
     </div>
     <div class="hero-stats">
-      <div>
+      <div class="hero-stat">
         <div class="hero-stat-num">15<em>+</em></div>
         <div class="hero-stat-lbl">Years Experience</div>
       </div>
-      <div>
+      <div class="hero-stat">
         <div class="hero-stat-num">100<em>+</em></div>
         <div class="hero-stat-lbl">Projects Done</div>
       </div>
-      <div>
+      <div class="hero-stat">
         <div class="hero-stat-num">100<em>%</em></div>
         <div class="hero-stat-lbl">Code Compliant</div>
       </div>
     </div>
   </div>
+
   <div class="hero-image-panel">
-    <img src="static/main/images/hero_bg.jpg" alt="Industrial electrical panel installation by Pinewood Electrical Automation" width="800" height="900" loading="eager" fetchpriority="high">
+    <img src="static/main/images/hero_bg.jpg" alt="Electrician working on industrial control panel — Pinewood Electrical Automation, Surrey BC" width="800" height="900" loading="eager" fetchpriority="high">
     <div class="hero-tags" aria-hidden="true">
       <div class="hero-tag">PLC Programming &amp; Automation</div>
       <div class="hero-tag">Control Panel Design &amp; Build</div>
@@ -100,7 +103,7 @@
   </div>
 </section>
 
-<!-- TRUST BAR -->
+<!-- ═══ TRUST BAR ══════════════════════════════════════════════════ -->
 <div class="trust-bar" role="complementary" aria-label="Credentials">
   <div class="container trust-inner">
     <div class="trust-item"><span class="ti-dot"></span>Licensed Electrical Contractor</div>
@@ -111,16 +114,20 @@
   </div>
 </div>
 
-<!-- SERVICES -->
+<!-- ═══ SERVICES ══════════════════════════════════════════════════ -->
 <section class="section section-dark" aria-labelledby="svc-h2">
   <div class="container">
     <div class="services-intro">
+
+      <!-- LEFT: sticky heading -->
       <div class="services-sticky">
         <span class="eyebrow">What We Do</span>
         <h2 id="svc-h2">Comprehensive Electrical &amp; <em>Automation</em> Services</h2>
         <p>From industrial automation and control panel design to residential panel upgrades and EV charger installation — engineered solutions for every electrical need.</p>
-        <a href="services.html" class="btn btn-gold mt-2">View All Services</a>
+        <a href="services.html" class="btn btn-gold" style="margin-top:0.5rem;">View All Services</a>
       </div>
+
+      <!-- RIGHT: 3×2 service card grid -->
       <div class="svc-grid">
         <div class="svc-card">
           <div class="svc-card-num">01</div>
@@ -140,7 +147,7 @@
           <div class="svc-card-num">03</div>
           <div class="svc-card-icon">🔌</div>
           <h3>Electrical System Upgrades</h3>
-          <p>Panel upgrades, rewiring, and system retrofits modernizing infrastructure to current code standards.</p>
+          <p>Panel upgrades, rewiring, and system retrofits to current BC Electrical Code standards.</p>
           <a href="electrical-upgrades.html" class="svc-link">Learn More</a>
         </div>
         <div class="svc-card">
@@ -165,15 +172,20 @@
           <a href="residential.html" class="svc-link">Learn More</a>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- FEATURE STRIP — image left, content right -->
+<!-- ═══ FEATURE STRIP — image left, content right ═══════════════════ -->
 <div class="feature-strip" aria-labelledby="feat-h2">
+  <!-- Image column: relative container, img fills it absolutely -->
   <div class="feature-img-wrap">
-    <img src="static/main/images/industrial_panel.jpg" alt="Industrial control panel engineering by Pinewood Electrical" width="800" height="600" loading="lazy">
+    <img src="static/main/images/industrial_panel.jpg"
+         alt="Industrial control panel engineered by Pinewood Electrical, Surrey BC"
+         width="800" height="600" loading="lazy">
   </div>
+  <!-- Content column -->
   <div class="feature-content">
     <span class="eyebrow">Why Pinewood</span>
     <h2 id="feat-h2">Engineering Precision.<br><em>Operational Reliability.</em></h2>
@@ -185,26 +197,38 @@
       <li>Minimal disruption to your facility's ongoing operations</li>
       <li>Full commissioning, testing, and post-project support included</li>
     </ul>
-    <div class="hero-actions">
+    <div class="feature-btn-row">
       <a href="about.html" class="btn btn-gold">About Our Team</a>
       <a href="contact.html" class="btn btn-ghost">Contact Us</a>
     </div>
   </div>
 </div>
 
-<!-- METRICS -->
+<!-- ═══ METRICS ════════════════════════════════════════════════════ -->
 <div class="metrics-band" aria-label="Key statistics">
   <div class="container">
     <div class="metrics-inner">
-      <div class="metric reveal"><div class="metric-num">15<em>+</em></div><div class="metric-lbl">Years Experience</div></div>
-      <div class="metric reveal d1"><div class="metric-num">100<em>+</em></div><div class="metric-lbl">Projects Delivered</div></div>
-      <div class="metric reveal d2"><div class="metric-num">100<em>%</em></div><div class="metric-lbl">Code Compliant</div></div>
-      <div class="metric reveal d3"><div class="metric-num">6<em>+</em></div><div class="metric-lbl">Cities Served</div></div>
+      <div class="metric reveal">
+        <div class="metric-num">15<em>+</em></div>
+        <div class="metric-lbl">Years Experience</div>
+      </div>
+      <div class="metric reveal d1">
+        <div class="metric-num">100<em>+</em></div>
+        <div class="metric-lbl">Projects Delivered</div>
+      </div>
+      <div class="metric reveal d2">
+        <div class="metric-num">100<em>%</em></div>
+        <div class="metric-lbl">Code Compliant</div>
+      </div>
+      <div class="metric reveal d3">
+        <div class="metric-num">6<em>+</em></div>
+        <div class="metric-lbl">Cities Served</div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- INDUSTRIES -->
+<!-- ═══ INDUSTRIES ═════════════════════════════════════════════════ -->
 <section class="section section-dark" aria-labelledby="ind-h2">
   <div class="container">
     <div class="section-header center reveal">
@@ -214,7 +238,7 @@
     </div>
     <div class="industry-grid">
       <div class="industry-card reveal">
-        <img src="static/main/images/industrial_panel.jpg" alt="Manufacturing electrical systems" loading="lazy" width="600" height="450">
+        <img src="static/main/images/industrial_panel.jpg" alt="Manufacturing electrical automation systems" loading="lazy" width="600" height="450">
         <div class="industry-card-body">
           <div class="industry-tag">Manufacturing</div>
           <h3>Manufacturing &amp; Production</h3>
@@ -222,7 +246,7 @@
         </div>
       </div>
       <div class="industry-card reveal d1">
-        <img src="static/main/images/commercial.jpg" alt="Commercial electrical contractor" loading="lazy" width="600" height="450">
+        <img src="static/main/images/commercial.jpg" alt="Commercial electrical services Surrey BC" loading="lazy" width="600" height="450">
         <div class="industry-card-body">
           <div class="industry-tag">Commercial</div>
           <h3>Commercial Properties</h3>
@@ -230,7 +254,7 @@
         </div>
       </div>
       <div class="industry-card reveal d2">
-        <img src="static/main/images/wiring.jpg" alt="Industrial wiring and controls" loading="lazy" width="600" height="450">
+        <img src="static/main/images/wiring.jpg" alt="Industrial wiring motor controls and VFDs" loading="lazy" width="600" height="450">
         <div class="industry-card-body">
           <div class="industry-tag">Industrial</div>
           <h3>Industrial &amp; Warehousing</h3>
@@ -244,8 +268,65 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="section section-mid" aria-labelledby="testi-h2">
+<!-- ═══ PROCESS ════════════════════════════════════════════════════ -->
+<section class="section section-mid" aria-labelledby="proc-h2">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="eyebrow">How We Work</span>
+      <h2 id="proc-h2">Our Project <em>Process</em></h2>
+      <p>Every project follows a structured, transparent workflow — no surprises on scope, timeline, or cost.</p>
+    </div>
+    <div class="process-row reveal">
+      <div class="process-item">
+        <div class="process-num">01</div>
+        <h3>Site Assessment</h3>
+        <p>Thorough evaluation of your facility, existing systems, and operational requirements before any work begins.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-num">02</div>
+        <h3>Engineered Design</h3>
+        <p>Custom system design with complete schematics, specifications, and permit applications handled for you.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-num">03</div>
+        <h3>Precise Installation</h3>
+        <p>Licensed electricians execute every installation with minimal disruption to your facility operations.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-num">04</div>
+        <h3>Testing &amp; Handover</h3>
+        <p>Full system commissioning, documentation package, and ongoing support — delivered at project close.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURE STRIP 2 — technician image right, content left ═══════ -->
+<div class="feature-strip feature-strip--reverse" aria-labelledby="feat2-h2">
+  <div class="feature-content feature-content--dark">
+    <span class="eyebrow">Our Standards</span>
+    <h2 id="feat2-h2">The Standards We Hold<br><em>Ourselves To</em></h2>
+    <p>Every decision, every installation, every interaction — measured against consistent professional standards built over 15+ years of delivering for clients across the Lower Mainland.</p>
+    <ul class="feature-list">
+      <li>We never start work without a fully engineered plan and permit where required</li>
+      <li>We communicate proactively — no surprises on scope, timeline, or cost</li>
+      <li>We leave every site cleaner than we found it</li>
+      <li>We stand behind our work with full post-project support</li>
+    </ul>
+    <div class="feature-btn-row">
+      <a href="about.html" class="btn btn-gold">Learn About Us</a>
+      <a href="contact.html" class="btn btn-ghost">Get a Quote</a>
+    </div>
+  </div>
+  <div class="feature-img-wrap">
+    <img src="static/main/images/technician.jpg"
+         alt="Pinewood Electrical technician performing precise installation work"
+         width="800" height="600" loading="lazy">
+  </div>
+</div>
+
+<!-- ═══ TESTIMONIALS ══════════════════════════════════════════════ -->
+<section class="section section-dark" aria-labelledby="testi-h2">
   <div class="container">
     <div class="section-header center reveal">
       <span class="eyebrow">Client Reviews</span>
@@ -293,7 +374,28 @@
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ═══ SERVICE AREA STRIP ════════════════════════════════════════ -->
+<section class="section-sm section-mid">
+  <div class="container">
+    <div class="area-strip reveal">
+      <div class="area-strip-label">We Serve</div>
+      <div class="area-pills">
+        <span class="area-pill">Surrey</span>
+        <span class="area-pill">Langley</span>
+        <span class="area-pill">Delta</span>
+        <span class="area-pill">Burnaby</span>
+        <span class="area-pill">Vancouver</span>
+        <span class="area-pill">White Rock</span>
+        <span class="area-pill">Coquitlam</span>
+        <span class="area-pill">New Westminster</span>
+        <span class="area-pill">Richmond</span>
+        <span class="area-pill">Abbotsford</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ════════════════════════════════════════════════════════ -->
 <div class="cta-band gold-band">
   <div class="container">
     <span class="eyebrow" style="color:rgba(8,17,30,0.45);justify-content:center;">Start Your Project</span>
@@ -308,11 +410,12 @@
 
 </main>
 
+<!-- ═══ FOOTER ═════════════════════════════════════════════════════ -->
 <footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <img src="static/main/images/logo.png" alt="Pinewood Electrical Automation" class="footer-logo" width="140" height="32">
+        <img src="static/main/images/logo.png" alt="Pinewood Electrical Automation" class="footer-logo" width="130" height="30">
         <p class="footer-desc">Licensed electrical and industrial automation solutions built for reliability, code compliance, and long-term performance. Proudly serving Surrey and the Lower Mainland.</p>
       </div>
       <div class="footer-col">
@@ -334,11 +437,11 @@
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <p style="margin-bottom:0.55rem;">Pinewood Electrical and Automation Ltd.</p>
+        <p style="margin-bottom:0.5rem;">Pinewood Electrical and Automation Ltd.</p>
         <a href="https://maps.google.com/?q=7358+148+Street+Surrey+BC" target="_blank" rel="noopener noreferrer">📍 7358 148 St, Surrey, BC V3S 3E6</a>
         <a href="tel:7783870031" class="footer-phone">📞 (778) 387-0031</a>
         <a href="mailto:pinewoodelectric@hotmail.com">📧 pinewoodelectric@hotmail.com</a>
-        <p style="margin-top:0.55rem;">🕓 By appointment · Emergency available</p>
+        <p style="margin-top:0.5rem;">🕓 By appointment · Emergency available</p>
       </div>
     </div>
   </div>
