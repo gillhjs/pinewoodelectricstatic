@@ -42,21 +42,20 @@ if (hamburger && mainNav) {
   });
 }
 
-// ─── ACTIVE NAV ───────────────────────────────────────────────────
-(function () {
-  const page = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.main-nav a').forEach(a => {
-    if (a.getAttribute('href') === page) a.classList.add('nav-active');
-  });
-})();
 
 // ─── FAQ ACCORDION ────────────────────────────────────────────────
 document.querySelectorAll('.faq-trigger').forEach(trigger => {
   trigger.addEventListener('click', () => {
     const item = trigger.closest('.faq-item');
     const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
   });
 });
 
@@ -68,13 +67,16 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(e.target);
     }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+}, { threshold: 0.06, rootMargin: '0px 0px -16px 0px' });
 
 document.querySelectorAll(
-  '.reveal, .svc-card, .testi-card, .industry-card, .value-card, ' +
-  '.faq-item, .process-item, .metric, .ci-item, .ind-card, .platform-pill'
+  '.reveal, .reveal-left, .reveal-scale, .svc-card, .testi-card, ' +
+  '.industry-card, .value-card, .faq-item, .process-item, .metric, ' +
+  '.ci-item, .ind-card, .platform-pill, .blog-card, .related-svc-card'
 ).forEach(el => {
-  el.classList.add('reveal');
+  if (!el.classList.contains('reveal-left') && !el.classList.contains('reveal-scale')) {
+    el.classList.add('reveal');
+  }
   revealObserver.observe(el);
 });
 
@@ -86,8 +88,8 @@ function countUp(el) {
   const target = parseInt(text.replace(/\D/g, ''), 10);
   if (isNaN(target)) return;
 
-  const dur  = 1800;
-  const ease = t => 1 - Math.pow(1 - t, 3.5);
+  const dur  = 1400;
+  const ease = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
   let start  = null;
 
   function frame(ts) {
@@ -109,7 +111,7 @@ const counterObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 
-document.querySelectorAll('.metric-num, .hero-stat .num, .rstat .big, .about-img-badge .big')
+document.querySelectorAll('.metric-num, .hero-stat-num, .rstat .big, .about-img-badge .big')
   .forEach(el => { if (/\d/.test(el.textContent)) counterObs.observe(el); });
 
 // ─── LAZY IMAGES ──────────────────────────────────────────────────
@@ -251,6 +253,109 @@ document.querySelectorAll('a[href*="maps.google"]').forEach(a => {
     });
   });
 });
+
+// ─── STICKY CALL: hide near footer ───────────────────────────────
+(function () {
+  const stickyCall = document.querySelector('.sticky-call');
+  const footer     = document.querySelector('.site-footer');
+  if (!stickyCall || !footer) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      stickyCall.style.opacity    = e.isIntersecting ? '0' : '';
+      stickyCall.style.pointerEvents = e.isIntersecting ? 'none' : '';
+    });
+  }, { threshold: 0.1 });
+  obs.observe(footer);
+})();
+
+// ─── BACK TO TOP ──────────────────────────────────────────────────
+(function () {
+  const btn = document.querySelector('.back-to-top');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof gtag === 'function') gtag('event', 'back_to_top', { event_category: 'engagement' });
+  });
+})();
+
+// ─── HERO ENTRY ANIMATION ──────────────────────────────────────────
+(function () {
+  const heroLeft = document.querySelector('.hero-left');
+  if (!heroLeft) return;
+  const EASE = 'cubic-bezier(0.22,1,0.36,1)';
+  const els = heroLeft.querySelectorAll(
+    '.hero-badge,.hero-company-name,h1,.hero-desc,.hero-actions,.hero-stats'
+  );
+  // Set initial state synchronously before paint
+  els.forEach(el => {
+    el.style.cssText += ';opacity:0;transform:translateY(14px);';
+  });
+  // Animate on next frame — single rAF avoids the double-frame flash
+  requestAnimationFrame(() => {
+    els.forEach((el, i) => {
+      el.style.transition = `opacity 0.65s ${EASE}, transform 0.65s ${EASE}`;
+      el.style.transitionDelay = (80 + i * 90) + 'ms';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  });
+})();
+
+// ─── FORM VALIDATION (per-field on blur) ──────────────────────────
+(function () {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  function validateField(input) {
+    const group = input.closest('.form-group');
+    if (!group) return true;
+    if (input.hasAttribute('required') && !input.value.trim()) {
+      group.classList.add('field-error');
+      group.classList.remove('field-success');
+      let msg = group.querySelector('.field-error-msg');
+      if (!msg) {
+        msg = document.createElement('p');
+        msg.className = 'field-error-msg';
+        group.appendChild(msg);
+      }
+      msg.textContent = 'This field is required';
+      return false;
+    }
+    if (input.type === 'email' && input.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+      group.classList.add('field-error');
+      let msg = group.querySelector('.field-error-msg');
+      if (!msg) { msg = document.createElement('p'); msg.className = 'field-error-msg'; group.appendChild(msg); }
+      msg.textContent = 'Please enter a valid email address';
+      return false;
+    }
+    group.classList.remove('field-error');
+    group.classList.add('field-success');
+    const msg = group.querySelector('.field-error-msg');
+    if (msg) msg.remove();
+    return true;
+  }
+
+  form.querySelectorAll('input, select, textarea').forEach(field => {
+    field.addEventListener('blur', () => validateField(field));
+    field.addEventListener('input', () => {
+      if (field.closest('.form-group').classList.contains('field-error')) validateField(field);
+    });
+  });
+
+  // Intercept submit to show spinner and validate all fields
+  const origSubmit = form.onsubmit;
+  form.addEventListener('submit', function(e) {
+    const fields = form.querySelectorAll('input[required], select[required], textarea[required]');
+    let valid = true;
+    fields.forEach(f => { if (!validateField(f)) valid = false; });
+    if (!valid) { e.preventDefault(); e.stopImmediatePropagation(); return; }
+    const btn = document.getElementById('form-submit');
+    if (btn) btn.classList.add('btn-loading');
+  }, true);
+})();
 
 // ─── PERF MARK ────────────────────────────────────────────────────
 if (window.performance?.mark) window.performance.mark('app_ready');

@@ -6,4 +6,4 @@ Disallow: /service_detail.html
 # Crawl-delay for polite crawling
 Crawl-delay: 1
 
-Sitemap: https://www.pinewoodelectrical.ca/sitemap.xml
+Sitemap: https://pinewoodelectricautomation.ca/sitemap.xml
