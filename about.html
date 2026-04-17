@@ -370,46 +370,47 @@ document.querySelectorAll('a[href*="maps.google"]').forEach(a => {
   const toggles = document.querySelectorAll('.footer-col-toggle');
   if (!toggles.length) return;
 
-  function isCollapsibleViewport() {
-    return window.innerWidth <= 640;
-  }
+  function isMobile() { return window.innerWidth <= 640; }
 
   function setInitialState() {
-    toggles.forEach(btn => {
-      const bodyId = btn.getAttribute('aria-controls');
+    toggles.forEach(tog => {
+      const bodyId = tog.getAttribute('aria-controls');
       const body   = document.getElementById(bodyId);
-      if (!body) return;
-      const col    = btn.closest('.footer-col');
-
-      if (isCollapsibleViewport()) {
-        // Contact col opens by default; others closed
-        const isContact = bodyId === 'footer-contact';
-        btn.setAttribute('aria-expanded', isContact ? 'true' : 'false');
-        if (isContact) {
-          col.classList.add('open');
-        } else {
-          col.classList.remove('open');
-        }
+      const col    = tog.closest('.footer-col');
+      if (!body || !col) return;
+      if (isMobile()) {
+        // Contact open by default, others closed
+        const open = bodyId === 'footer-contact';
+        tog.setAttribute('aria-expanded', String(open));
+        col.classList.toggle('open', open);
       } else {
-        // Desktop: all open, no toggle behaviour
-        btn.setAttribute('aria-expanded', 'true');
+        tog.setAttribute('aria-expanded', 'true');
         col.classList.add('open');
       }
     });
   }
 
-  toggles.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (!isCollapsibleViewport()) return; // no-op on desktop
-      const col  = btn.closest('.footer-col');
-      const open = col.classList.toggle('open');
-      btn.setAttribute('aria-expanded', String(open));
+  function toggle(tog) {
+    if (!isMobile()) return;
+    const col  = tog.closest('.footer-col');
+    if (!col) return;
+    const open = col.classList.toggle('open');
+    tog.setAttribute('aria-expanded', String(open));
+  }
+
+  toggles.forEach(tog => {
+    tog.addEventListener('click', () => toggle(tog));
+    // Keyboard support for div[role=button]
+    tog.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle(tog);
+      }
     });
   });
 
   setInitialState();
 
-  // Re-evaluate on resize (debounced)
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
