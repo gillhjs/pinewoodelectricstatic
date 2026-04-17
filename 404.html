@@ -1079,130 +1079,74 @@ textarea{min-height:120px;resize:vertical;line-height:1.65;}
   .footer-links a{font-size:0.76rem;opacity:0.65;}
 }
 
-/* ── FOOTER COLLAPSIBLE (mobile) ── */
-
-/* Toggle row — the h4 + chevron */
+/* ── FOOTER TOGGLE — hidden, no collapsible behaviour ── */
+/* Footer is always fully visible on all screen sizes */
 .footer-col-toggle{
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  pointer-events:none;
   cursor:default;
   padding:0;
-  /* Reset all button styles */
   width:100%;
   background:none;
   border:none;
-  text-align:left;
-  -webkit-appearance:none;
-  appearance:none;
-  -webkit-tap-highlight-color:transparent;
-  outline:none;
 }
-.footer-col-toggle h4{margin-bottom:0;}
-
-/* Chevron — hidden by default everywhere */
-.footer-col-toggle-icon{
-  display:none;
-  width:16px;height:16px;
-  flex-shrink:0;
-  color:var(--text-muted);
-  transition:transform 0.26s var(--ease-out);
-}
-.footer-col-toggle-icon svg{display:block;width:16px;height:16px;}
-
-/* Footer body — always visible by default */
-.footer-col-body{
-  display:block;
-}
-
-/* ── MOBILE: make it collapsible ── */
-@media(max-width:640px){
-  /* Show the chevron on mobile only */
-  .footer-col-toggle-icon{display:flex;align-items:center;justify-content:center;}
-  .footer-col.open .footer-col-toggle-icon{transform:rotate(180deg);}
-
-  /* Toggle is clickable on mobile */
-  .footer-col-toggle{cursor:pointer;}
-
-  /* Hide body by default on mobile, show when open */
-  .footer-col-body{
-    display:none;
-    overflow:hidden;
-  }
-  .footer-col.open .footer-col-body{display:block;}
-
-  /* Brand col always visible */
-  .footer-brand{padding-bottom:0.5rem;}
-
-  /* Add divider between sections */
-  .footer-col{border-bottom:1px solid var(--nb);padding-bottom:0.85rem;margin-bottom:0.85rem;}
-  .footer-col:last-child{border-bottom:none;margin-bottom:0;}
-}
+.footer-col-toggle h4{margin-bottom:1.1rem;}
+/* Chevron NEVER shows */
+.footer-col-toggle-icon{display:none !important;}
+/* Body always visible */
+.footer-col-body{display:block !important;}
 
 /* ── SERVICE NAVIGATOR STRIP ── */
-/* Pill-row design — simple, works on all screens, no overflow tricks */
 .svc-nav-strip{
   background:var(--s1);
   border-top:1px solid var(--nb);
   border-bottom:1px solid var(--nb);
-  padding:1.75rem 0;
+  padding:1.25rem 0;
+  text-align:center;
 }
 .svc-nav-strip-label{
-  font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:700;
+  font-family:'Outfit',sans-serif;font-size:0.62rem;font-weight:700;
   text-transform:uppercase;letter-spacing:2.5px;color:var(--gold-light);
-  text-align:center;margin-bottom:1.1rem;
+  margin-bottom:0.75rem;
   display:flex;align-items:center;justify-content:center;gap:10px;
 }
 .svc-nav-strip-label::before,.svc-nav-strip-label::after{
-  content:'';width:36px;height:1px;background:var(--nb2);flex-shrink:0;
+  content:'';width:32px;height:1px;background:var(--nb2);flex-shrink:0;
 }
-.svc-nav-pills{
+.svc-nav-links{
   display:flex;
   flex-wrap:wrap;
+  align-items:center;
   justify-content:center;
-  gap:0.45rem;
+  gap:0.2rem 0.1rem;
   padding:0 1rem;
 }
-.svc-nav-pill{
-  display:inline-flex;
-  align-items:center;
-  gap:0.45rem;
-  padding:0.52rem 1rem;
-  background:var(--s2);
-  border:1px solid var(--nb2);
-  border-radius:var(--r-full);
-  text-decoration:none;
+.svc-nav-link{
   font-family:'Outfit',sans-serif;
-  font-size:0.75rem;
-  font-weight:600;
+  font-size:0.8rem;
+  font-weight:500;
   color:var(--text-muted);
-  letter-spacing:0.2px;
+  text-decoration:none;
+  padding:0.3rem 0.65rem;
+  border-radius:var(--r-full);
   white-space:nowrap;
-  transition:background 0.18s,border-color 0.18s,color 0.18s;
+  transition:color 0.15s,background 0.15s;
 }
-.svc-nav-pill:hover{
-  background:var(--s3);
-  border-color:var(--gold-border);
-  color:var(--text-h);
-}
-.svc-nav-pill.svc-nav-active{
-  background:var(--gold-pale);
-  border-color:var(--gold-border);
+.svc-nav-link:hover{color:var(--text-h);background:var(--nb);}
+.svc-nav-link.svc-nav-active{
   color:var(--gold-light);
+  background:var(--gold-pale);
   pointer-events:none;
 }
-.svc-nav-pill svg{
-  width:13px;height:13px;
+/* Dot separator between links */
+.svc-nav-sep{
+  color:var(--nb2);
+  font-size:0.7rem;
+  user-select:none;
   flex-shrink:0;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  opacity:0.75;
 }
 @media(max-width:640px){
-  .svc-nav-strip{padding:1.25rem 0;}
-  .svc-nav-pills{gap:0.35rem;padding:0 0.75rem;}
-  .svc-nav-pill{font-size:0.72rem;padding:0.46rem 0.8rem;}
+  .svc-nav-strip{padding:1rem 0;}
+  .svc-nav-link{font-size:0.76rem;padding:0.28rem 0.55rem;}
 }

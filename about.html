@@ -365,58 +365,5 @@ document.querySelectorAll('a[href*="maps.google"]').forEach(a => {
 })();
 
 
-// ─── FOOTER COLLAPSIBLE COLUMNS ──────────────────────────────────
-(function () {
-  const toggles = document.querySelectorAll('.footer-col-toggle');
-  if (!toggles.length) return;
-
-  function isMobile() { return window.innerWidth <= 640; }
-
-  function setInitialState() {
-    toggles.forEach(tog => {
-      const bodyId = tog.getAttribute('aria-controls');
-      const body   = document.getElementById(bodyId);
-      const col    = tog.closest('.footer-col');
-      if (!body || !col) return;
-      if (isMobile()) {
-        // Contact open by default, others closed
-        const open = bodyId === 'footer-contact';
-        tog.setAttribute('aria-expanded', String(open));
-        col.classList.toggle('open', open);
-      } else {
-        tog.setAttribute('aria-expanded', 'true');
-        col.classList.add('open');
-      }
-    });
-  }
-
-  function toggle(tog) {
-    if (!isMobile()) return;
-    const col  = tog.closest('.footer-col');
-    if (!col) return;
-    const open = col.classList.toggle('open');
-    tog.setAttribute('aria-expanded', String(open));
-  }
-
-  toggles.forEach(tog => {
-    tog.addEventListener('click', () => toggle(tog));
-    // Keyboard support for div[role=button]
-    tog.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle(tog);
-      }
-    });
-  });
-
-  setInitialState();
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(setInitialState, 120);
-  }, { passive: true });
-})();
-
 // ─── PERF MARK ────────────────────────────────────────────────────
 if (window.performance?.mark) window.performance.mark('app_ready');

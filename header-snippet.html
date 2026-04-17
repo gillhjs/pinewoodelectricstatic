@@ -1,0 +1,66 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  PINEWOOD ELECTRICAL — HEADER SNIPPET                       ║
+  ║  Copy this into the <body> of every page.                   ║
+  ║  Change class="nav-active" to whichever link matches        ║
+  ║  the current page.                                          ║
+  ╚══════════════════════════════════════════════════════════════╝
+
+  USAGE:
+  1. Paste everything below into the top of <body> on each page.
+  2. On each page, set class="nav-active" on the matching nav link.
+     e.g. on about.html → <a href="about.html" class="nav-active">About</a>
+
+  ACTIVE LINK REFERENCE:
+  index.html            → class="nav-active" on Home
+  services.html         → class="nav-active" on Services
+  plc-automation.html   → class="nav-active" on Services
+  control-panels.html   → class="nav-active" on Services
+  electrical-upgrades.html → class="nav-active" on Services
+  ev-charger.html       → class="nav-active" on Services
+  maintenance.html      → class="nav-active" on Services
+  residential.html      → class="nav-active" on Services
+  industries.html       → class="nav-active" on Industries
+  about.html            → class="nav-active" on About
+  reviews.html          → class="nav-active" on Reviews
+  faq.html              → class="nav-active" on FAQ  (also: class="nav-active" on faq href)
+  blog.html             → class="nav-active" on Blog
+  contact.html          → class="nav-active" on Contact
+-->
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header" role="banner">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo-link" aria-label="Pinewood Electrical Automation — Home">
+      <img src="static/main/images/logo.png" alt="Pinewood Electrical Automation" class="logo-img" width="120" height="30">
+      <div class="logo-name">
+        <span class="logo-name-main">Pinewood Electrical</span>
+        <span class="logo-name-sub">Automation Ltd.</span>
+      </div>
+    </a>
+    <div class="nav-right">
+      <a href="tel:7783870031" class="nav-phone nav-phone-desktop" aria-label="Call us">(778) 387-0031</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile nav panel — sits OUTSIDE header to avoid stacking context issues -->
+<nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+  <a href="tel:7783870031" class="nav-phone-mobile" aria-label="Call (778) 387-0031"><span aria-hidden="true">📞</span> (778) 387-0031</a>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="industries.html">Industries</a>
+  <a href="about.html">About</a>
+  <a href="reviews.html">Reviews</a>
+  <a href="faq.html">FAQ</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="btn-nav">Get a Quote</a>
+</nav>
+
+<!-- Dim overlay shown when mobile nav is open -->
+<div id="nav-overlay" aria-hidden="true"></div>
