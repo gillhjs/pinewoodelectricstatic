@@ -1091,18 +1091,17 @@ textarea{min-height:120px;resize:vertical;line-height:1.65;}
   -webkit-tap-highlight-color:transparent;
 }
 .footer-col-toggle h4{margin-bottom:0;pointer-events:none;}
+.footer-col-toggle-icon{
+  width:16px;height:16px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);flex-shrink:0;
+  transition:transform 0.26s var(--ease-out);
+}
+.footer-col-toggle-icon svg{display:block;flex-shrink:0;}
 
 /* ── COLLAPSIBLE FOOTER (mobile) ── */
 @media(max-width:640px){
   /* Each col section gets a toggle trigger — base styles in .footer-col-toggle above */
-  .footer-col-toggle-icon{
-    width:20px;height:20px;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--text-muted);
-    font-size:0.85rem;
-    transition:transform 0.26s var(--ease-out);
-    flex-shrink:0;
-  }
   .footer-col.open .footer-col-toggle-icon{transform:rotate(180deg);}
 
   /* Collapsible body — hidden by default */
@@ -1133,7 +1132,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65;}
 .svc-nav-strip-label{
   font-family:'Outfit',sans-serif;font-size:0.68rem;font-weight:700;
   text-transform:uppercase;letter-spacing:2.5px;color:var(--gold-light);
-  text-align:center;margin-bottom:1.5rem;
+  text-align:center;margin-bottom:1.25rem;
   display:flex;align-items:center;justify-content:center;gap:12px;
 }
 .svc-nav-strip-label::before,.svc-nav-strip-label::after{
@@ -1150,6 +1149,8 @@ textarea{min-height:120px;resize:vertical;line-height:1.65;}
   overflow:hidden;
   max-width:860px;
   margin:0 auto;
+  /* Constrain to container width on desktop */
+  width:min(860px, 92%);
 }
 .svc-nav-item{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -1210,13 +1211,13 @@ textarea{min-height:120px;resize:vertical;line-height:1.65;}
 .svc-nav-item.svc-nav-active .svc-nav-name{color:var(--gold-light);}
 /* Mobile: horizontal scroll strip — all 6 visible, no wrapping */
 @media(max-width:640px){
-  .svc-nav-strip{padding:1.5rem 0;}
-  .svc-nav-strip-label{margin-bottom:1rem;font-size:0.62rem;}
-  /* Remove border-radius so strip goes edge-to-edge */
+  .svc-nav-strip{padding:1.25rem 0;}
+  .svc-nav-strip-label{margin-bottom:0.85rem;font-size:0.62rem;padding:0 1rem;}
   .svc-nav-grid{
     border-radius:0;
     border-left:none;
     border-right:none;
+    width:100%;
     max-width:100%;
     overflow-x:auto;
     overflow-y:hidden;
@@ -1224,24 +1225,23 @@ textarea{min-height:120px;resize:vertical;line-height:1.65;}
     justify-content:flex-start;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
-    /* Fade hint at right edge to indicate scroll */
+    padding:0;
   }
   .svc-nav-grid::-webkit-scrollbar{display:none;}
   .svc-nav-item{
     flex:0 0 auto;
-    width:calc(100vw / 3.4);  /* show ~3.4 items = hints there's more */
-    min-width:90px;
-    max-width:120px;
+    width:100px;
+    min-width:88px;
     border-bottom:none;
-    padding:1rem 0.5rem;
+    padding:0.85rem 0.4rem;
   }
-  .svc-nav-name{font-size:0.6rem;letter-spacing:0.8px;}
-  .svc-nav-icon{width:30px;height:30px;}
-  .svc-nav-icon svg{width:14px;height:14px;}
+  .svc-nav-name{font-size:0.58rem;letter-spacing:0.6px;}
+  .svc-nav-icon{width:28px;height:28px;}
+  .svc-nav-icon svg{width:13px;height:13px;}
 }
 @media(max-width:380px){
   .svc-nav-item{
-    width:calc(100vw / 2.8);
-    min-width:85px;
+    width:88px;
+    min-width:80px;
   }
 }
