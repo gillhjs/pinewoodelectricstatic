@@ -364,5 +364,6 @@ document.querySelectorAll('a[href*="maps.google"]').forEach(a => {
   }, true);
 })();
 
+
 // ─── PERF MARK ────────────────────────────────────────────────────
 if (window.performance?.mark) window.performance.mark('app_ready');
