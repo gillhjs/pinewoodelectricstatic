@@ -773,25 +773,116 @@ textarea{min-height:120px;resize:vertical;line-height:1.65;}
 .area-pill{background:var(--s4);border:1px solid var(--nb2);border-radius:var(--r-full);padding:0.33rem 0.9rem;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:500;color:var(--text-body);white-space:nowrap;}
 
 /* ── FOOTER ── */
-.site-footer{background:var(--s0);padding-top:80px;border-top:1px solid var(--nb);}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2.5rem 3rem;padding-bottom:4.5rem;border-bottom:1px solid var(--nb);}
-@media(max-width:920px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem 2.5rem;}}
-@media(max-width:500px){.footer-grid{grid-template-columns:1fr;gap:0;}.footer-grid>div{padding:1.75rem 0;border-bottom:1px solid var(--nb);}.footer-grid>div:last-child{border-bottom:none;}}
-@media(max-width:400px){.footer-col a{word-break:break-word;overflow-wrap:anywhere;}.footer-copy{word-break:break-word;}}
-.footer-logo{height:38px;width:auto;margin-bottom:1.1rem;}
-.footer-desc{color:var(--text-muted);font-size:0.87rem;line-height:1.75;max-width:100%;}
-.footer-col h4{font-family:'Outfit',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.1rem;}
-.footer-col a{display:block;color:var(--text-muted);font-size:0.88rem;margin-bottom:0.55rem;font-weight:400;transition:color 0.18s,transform 0.2s;padding:0.1rem 0;min-height:28px;display:flex;align-items:center;}
+.site-footer{background:var(--s0);padding-top:72px;border-top:1px solid var(--nb);}
+
+/* 4-column grid: Brand · Services · Company · Contact */
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.8fr 0.8fr 0.8fr 1.6fr;
+  gap:2rem 2.5rem;
+  padding-bottom:4rem;
+  border-bottom:1px solid var(--nb);
+  align-items:start;
+}
+
+/* Tablet: 2×2 grid */
+@media(max-width:960px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem 2.5rem;}
+  .footer-brand{grid-column:1/-1;}
+  .footer-col-contact{grid-column:1/-1;}
+}
+/* Mobile: single column with dividers */
+@media(max-width:500px){
+  .footer-grid{grid-template-columns:1fr;gap:0;}
+  .footer-grid>div{padding:1.5rem 0;border-bottom:1px solid var(--nb);}
+  .footer-grid>div:last-child{border-bottom:none;}
+}
+@media(max-width:400px){
+  .footer-col a{word-break:break-word;overflow-wrap:anywhere;}
+  .footer-copy{word-break:break-word;}
+}
+
+/* Brand column */
+.footer-logo{height:36px;width:auto;margin-bottom:1rem;}
+.footer-desc{
+  color:var(--text-muted);font-size:0.86rem;
+  line-height:1.72;max-width:220px;
+  margin-bottom:1.1rem;
+}
+
+/* Trust badges under brand description */
+.footer-badges{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.2rem;}
+.footer-badge{
+  font-family:'Outfit',sans-serif;font-size:0.62rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--gold);
+  background:var(--gold-pale);
+  border:1px solid var(--gold-border);
+  border-radius:var(--r-full);
+  padding:3px 9px;
+  white-space:nowrap;
+}
+
+/* Column headings */
+.footer-col h4{
+  font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:700;
+  letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--text-h);
+  margin-bottom:1.1rem;
+  padding-bottom:0.55rem;
+  border-bottom:1px solid var(--nb);
+}
+/* Company col B — blank heading keeps alignment with col A */
+.footer-col-b h4{
+  visibility:hidden;
+}
+
+
+/* Column links */
+.footer-col a{
+  display:flex;align-items:center;
+  color:var(--text-muted);font-size:0.875rem;
+  margin-bottom:0.5rem;font-weight:400;
+  padding:0.08rem 0;
+  transition:color 0.18s,transform 0.18s;
+  text-decoration:none;
+}
 .footer-col a:hover{color:var(--gold-light);transform:translateX(3px);}
 .footer-col p{color:var(--text-muted);font-size:0.86rem;line-height:1.7;}
-.footer-phone{color:var(--gold)!important;font-weight:500!important;}
+
+/* Contact column — icon + text rows */
+.footer-contact-item{
+  display:flex;align-items:flex-start;gap:0.55rem;
+  margin-bottom:0.65rem;
+}
+.footer-contact-item:last-child{margin-bottom:0;}
+.fci-icon{font-size:0.9rem;flex-shrink:0;margin-top:1px;line-height:1.4;}
+.footer-contact-item a,
+.footer-contact-item p{
+  color:var(--text-muted);font-size:0.875rem;
+  line-height:1.5;margin:0;
+  transition:color 0.18s;
+}
+.footer-contact-item a:hover{color:var(--gold-light);}
+.footer-phone{color:var(--gold)!important;font-weight:600!important;font-size:0.95rem!important;}
 .footer-phone:hover{color:var(--gold-light)!important;}
-.footer-bottom{padding:1.6rem 0;}
-.footer-bottom-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;}
-.footer-copy{color:var(--text-muted);font-size:0.74rem;opacity:0.6;}
+
+/* Bottom bar */
+.footer-bottom{padding:1.4rem 0;}
+.footer-bottom-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:0.75rem;
+}
+.footer-copy{color:var(--text-muted);font-size:0.72rem;opacity:0.6;}
 .footer-links{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
-.footer-links a{color:var(--text-muted);font-size:0.74rem;opacity:0.6;transition:color 0.18s,opacity 0.18s;}
+.footer-links a{
+  color:var(--text-muted);font-size:0.72rem;opacity:0.6;
+  transition:color 0.18s,opacity 0.18s;
+}
 .footer-links a:hover{color:var(--gold-light);opacity:1;}
+@media(max-width:480px){
+  .footer-bottom-inner{flex-direction:column;align-items:center;text-align:center;}
+}
 
 /* ── STICKY CALL ── */
 .sticky-call{position:fixed;bottom:24px;right:22px;width:52px;height:52px;border-radius:50%;background:var(--gold);color:var(--s0);display:flex;align-items:center;justify-content:center;z-index:900;box-shadow:0 4px 22px rgba(200,144,47,0.52);transition:transform 0.28s var(--ease-spring),box-shadow 0.28s,background 0.18s,opacity 0.3s;text-decoration:none;overflow:hidden;padding:0;-webkit-tap-highlight-color:transparent;}
