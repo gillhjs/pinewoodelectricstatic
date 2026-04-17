@@ -1,228 +1,421 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Page Not Found | Pinewood Electrical Automation — Surrey, BC</title>
-  <meta name="description" content="The page you were looking for could not be found. Return to Pinewood Electrical Automation — Surrey's licensed electrical contractor.">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, follow">
-  <meta name="geo.region" content="CA-BC">
-  <meta name="geo.placename" content="Surrey, British Columbia">
-  <meta name="geo.position" content="49.1044;-122.8238">
-  <meta name="ICBM" content="49.1044, -122.8238">
-  <link rel="canonical" href="https://pinewoodelectricautomation.ca/404.html">
-  <link rel="icon" type="image/png" href="static/main/images/logo.png">
-  <link rel="apple-touch-icon" href="static/main/images/logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="static/main/style.css">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXFNEEB0BX"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HXFNEEB0BX');</script>
-  <style>
-    .notfound-section{
-      min-height:calc(100vh - var(--header-h) - 200px);
-      display:flex;align-items:center;justify-content:center;
-      padding:var(--sec) 0;background:var(--s0);position:relative;overflow:hidden;
+'use strict';
+
+// ─── HEADER SCROLL ────────────────────────────────────────────────
+const header = document.querySelector('.site-header');
+if (header) {
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 24);
+  }, { passive: true });
+}
+
+// ─── HAMBURGER / MOBILE NAV ───────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mainNav   = document.getElementById('mainNav');
+
+if (hamburger && mainNav) {
+  const overlay = document.getElementById('nav-overlay');
+
+  function openNav() {
+    mainNav.classList.add('open');
+    if (overlay) overlay.classList.add('open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    mainNav.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.contains('open') ? closeNav() : openNav();
+  });
+
+  // Close when any nav link is tapped
+  mainNav.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', closeNav)
+  );
+
+  // Close when overlay is tapped
+  if (overlay) overlay.addEventListener('click', closeNav);
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeNav();
+  });
+}
+
+
+// ─── FAQ ACCORDION ────────────────────────────────────────────────
+document.querySelectorAll('.faq-trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const item = trigger.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
     }
-    .notfound-grid-bg{position:absolute;inset:0;pointer-events:none;
-      background-image:linear-gradient(var(--nb) 1px,transparent 1px),linear-gradient(90deg,var(--nb) 1px,transparent 1px);
-      background-size:56px 56px;}
-    .notfound-inner{position:relative;z-index:2;text-align:center;max-width:560px;padding:0 1.5rem;}
-    .notfound-code{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(96px,16vw,160px);font-weight:500;line-height:1;color:var(--text-h);opacity:0.08;display:block;margin-bottom:-0.15em;user-select:none;}
-    .notfound-eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:'Outfit',sans-serif;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:1.2rem;}
-    .notfound-eyebrow::before{content:'';width:22px;height:1.5px;background:var(--gold);flex-shrink:0;}
-    .notfound-inner h1{margin-bottom:1.25rem;font-size:clamp(28px,4vw,46px);}
-    .notfound-inner p{font-size:1rem;line-height:1.78;margin-bottom:2.25rem;max-width:420px;margin-left:auto;margin-right:auto;}
-    .notfound-actions{display:flex;gap:0.85rem;flex-wrap:wrap;justify-content:center;}
-    .notfound-links{margin-top:2.75rem;padding-top:2rem;border-top:1px solid var(--nb2);}
-    .notfound-links p{font-family:'Outfit',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:1rem;}
-    .notfound-link-grid{display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;}
-    .notfound-link-grid a{font-family:'Outfit',sans-serif;font-size:0.76rem;font-weight:500;color:var(--text-muted);background:var(--nb);border:1px solid var(--nb2);border-radius:var(--r-xs);padding:0.42rem 0.9rem;transition:color 0.18s,border-color 0.18s,background 0.18s;}
-    .notfound-link-grid a:hover{color:var(--gold-light);border-color:var(--gold-border);background:var(--gold-pale);}
-  </style>
-</head>
-<body>
-<a class="skip-link" href="#main-content">Skip to main content</a>
+  });
+});
 
-<header class="site-header" role="banner">
-  <div class="container nav-wrap">
-    <a href="index.html" class="logo-link" aria-label="Pinewood Electrical Automation — Home">
-      <img src="static/main/images/logo.png" alt="Pinewood Electrical Automation" class="logo-img" width="120" height="30">
-      <div class="logo-name">
-        <span class="logo-name-main">Pinewood Electrical</span>
-        <span class="logo-name-sub">Automation Ltd.</span>
-      </div>
-    </a>
-    <div class="nav-right">
-      <a href="tel:7783870031" class="nav-phone nav-phone-desktop" aria-label="Call us">(778) 387-0031</a>
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</header>
-<nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
-      <a href="tel:7783870031" class="nav-phone-mobile" aria-label="Call (778) 387-0031"><span aria-hidden="true">📞</span> (778) 387-0031</a>
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="industries.html">Industries</a>
-      <a href="about.html">About</a>
-      <a href="reviews.html">Reviews</a>
-      <a href="faq.html">FAQ</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
-      <a href="contact.html" class="btn-nav">Get a Quote</a>
-    </nav>
-<div id="nav-overlay" aria-hidden="true"></div>
+// ─── REVEAL ON SCROLL ─────────────────────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -16px 0px' });
 
-<main id="main-content">
-<section class="notfound-section" aria-labelledby="notfound-h1">
-  <div class="notfound-grid-bg" aria-hidden="true"></div>
-  <div class="notfound-inner">
-    <span class="notfound-code" aria-hidden="true">404</span>
-    <span class="notfound-eyebrow">Page Not Found</span>
-    <h1 id="notfound-h1">This Page <em>Doesn't Exist</em></h1>
-    <p>The page you were looking for has moved, been removed, or the link may be incorrect. Let us get you back on track.</p>
-    <div class="notfound-actions">
-      <a href="index.html" class="btn btn-gold">Go to Homepage</a>
-      <a href="contact.html" class="btn btn-ghost">Contact Us</a>
-    </div>
-    <div class="notfound-links">
-      <p>Or jump to a service</p>
-      <div class="notfound-link-grid">
-        <a href="plc-automation.html">PLC &amp; Automation</a>
-        <a href="control-panels.html">Control Panels</a>
-        <a href="electrical-upgrades.html">Electrical Upgrades</a>
-        <a href="ev-charger.html">EV Charger Installation</a>
-        <a href="maintenance.html">Maintenance</a>
-        <a href="residential.html">Residential Electrical</a>
-        <a href="about.html">About Us</a>
-        <a href="reviews.html">Reviews</a>
-        <a href="faq.html">FAQ</a>
-      </div>
-    </div>
-  </div>
-</section>
-</main>
+document.querySelectorAll(
+  '.reveal, .reveal-left, .reveal-scale, .svc-card, .testi-card, ' +
+  '.industry-card, .value-card, .faq-item, .process-item, .metric, ' +
+  '.ci-item, .ind-card, .platform-pill, .blog-card, .related-svc-card'
+).forEach(el => {
+  if (!el.classList.contains('reveal-left') && !el.classList.contains('reveal-scale')) {
+    el.classList.add('reveal');
+  }
+  revealObserver.observe(el);
+});
 
-<div class="svc-nav-strip" aria-label="All Services">
-  <div class="container">
-    <div class="svc-nav-strip-label">All Services</div>
-    <div class="svc-nav-grid">
-    <a href="plc-automation.html" class="svc-nav-item" aria-label="PLC &amp; Automation">
-      <span class="svc-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/></svg></span>
-      <span class="svc-nav-name">PLC &amp;<br>Automation</span>
-    </a>
-    <a href="control-panels.html" class="svc-nav-item" aria-label="Control Panels">
-      <span class="svc-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M6 8h2M6 12h2M6 16h2"/><rect x="11" y="7" width="7" height="3" rx="1"/><rect x="11" y="13" width="7" height="3" rx="1"/></svg></span>
-      <span class="svc-nav-name">Control<br>Panels</span>
-    </a>
-    <a href="electrical-upgrades.html" class="svc-nav-item" aria-label="Electrical Upgrades">
-      <span class="svc-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
-      <span class="svc-nav-name">Electrical<br>Upgrades</span>
-    </a>
-    <a href="ev-charger.html" class="svc-nav-item" aria-label="EV Charger Install">
-      <span class="svc-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="6" width="22" height="13" rx="2"/><path d="M5 20v2M19 20v2"/><path d="M7 10h3l1 4h6"/><circle cx="17" cy="14" r="1"/></svg></span>
-      <span class="svc-nav-name">EV Charger<br>Install</span>
-    </a>
-    <a href="maintenance.html" class="svc-nav-item" aria-label="Maintenance">
-      <span class="svc-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-      <span class="svc-nav-name">Maintenance</span>
-    </a>
-    <a href="residential.html" class="svc-nav-item" aria-label="Residential">
-      <span class="svc-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></span>
-      <span class="svc-nav-name">Residential</span>
-    </a>
-    </div>
-  </div>
-</div>
-<footer class="site-footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
+// ─── COUNTER ANIMATION ────────────────────────────────────────────
+function countUp(el) {
+  const text   = el.dataset.count || el.textContent.trim();
+  const prefix = text.match(/^[^\d]*/)?.[0] || '';
+  const suffix = text.match(/[^\d]*$/)?.[0] || '';
+  const target = parseInt(text.replace(/\D/g, ''), 10);
+  if (isNaN(target)) return;
 
-      <!-- Brand col — always visible -->
-      <div class="footer-brand">
-        <img src="static/main/images/logo.png" alt="Pinewood Electrical Automation" class="footer-logo" width="130" height="30">
-        <p class="footer-desc">Licensed electrical and industrial automation solutions built for reliability, code compliance, and long-term performance. Proudly serving Surrey and the Lower Mainland.</p>
-      </div>
+  const dur  = 1400;
+  const ease = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+  let start  = null;
 
-      <!-- Services col — collapsible on mobile -->
-      <div class="footer-col">
-        <button class="footer-col-toggle" aria-expanded="false" aria-controls="footer-services">
-          <h4>Services</h4>
-          <span class="footer-col-toggle-icon" aria-hidden="true">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
-          </span>
-        </button>
-        <div class="footer-col-body" id="footer-services">
-          <a href="plc-automation.html">PLC &amp; Automation</a>
-          <a href="control-panels.html">Control Panel Design</a>
-          <a href="electrical-upgrades.html">Electrical Upgrades</a>
-          <a href="ev-charger.html">EV Charger Installation</a>
-          <a href="maintenance.html">Maintenance &amp; Support</a>
-          <a href="residential.html">Residential Electrical</a>
-        </div>
-      </div>
+  function frame(ts) {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / dur, 1);
+    el.textContent = prefix + Math.round(ease(p) * target) + suffix;
+    if (p < 1) requestAnimationFrame(frame);
+    else el.textContent = prefix + target + suffix;
+  }
+  requestAnimationFrame(frame);
+}
 
-      <!-- Company col — collapsible on mobile -->
-      <div class="footer-col">
-        <button class="footer-col-toggle" aria-expanded="false" aria-controls="footer-company">
-          <h4>Company</h4>
-          <span class="footer-col-toggle-icon" aria-hidden="true">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
-          </span>
-        </button>
-        <div class="footer-col-body" id="footer-company">
-          <a href="about.html">About Us</a>
-          <a href="industries.html">Industries</a>
-          <a href="reviews.html">Reviews</a>
-          <a href="blog.html">Blog</a>
-          <a href="faq.html">FAQ</a>
-          <a href="contact.html">Contact</a>
-          <a href="privacy.html">Privacy Policy</a>
-        </div>
-      </div>
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      countUp(e.target);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
 
-      <!-- Contact col — always expanded (has phone/address) -->
-      <div class="footer-col">
-        <button class="footer-col-toggle" aria-expanded="true" aria-controls="footer-contact">
-          <h4>Contact</h4>
-          <span class="footer-col-toggle-icon" aria-hidden="true">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
-          </span>
-        </button>
-        <div class="footer-col-body" id="footer-contact">
-          <p style="margin-bottom:0.5rem;">Pinewood Electrical and Automation Ltd.</p>
-          <a href="https://maps.google.com/?q=7358+148+Street+Surrey+BC" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">📍</span> 7358 148 St, Surrey, BC V3S 3E6</a>
-          <a href="tel:7783870031" class="footer-phone"><span aria-hidden="true">📞</span> (778) 387-0031</a>
-          <a href="mailto:pinewoodelectric@hotmail.com"><span aria-hidden="true">📧</span> pinewoodelectric@hotmail.com</a>
-          <p style="margin-top:0.5rem;"><span aria-hidden="true">🕓</span> By appointment · Emergency available</p>
-        </div>
-      </div>
+document.querySelectorAll('.metric-num, .hero-stat-num, .rstat .big, .about-img-badge .big')
+  .forEach(el => { if (/\d/.test(el.textContent)) counterObs.observe(el); });
 
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="container footer-bottom-inner">
-      <p class="footer-copy">© 2026 Pinewood Electrical and Automation Ltd. — Surrey, BC &nbsp;|&nbsp; Designed by <a href="https://pinewoodelectricautomation.ca" target="_blank" rel="noopener noreferrer" style="color:var(--gold);font-weight:500;opacity:1;">Cyber Verge</a>, Coquitlam, BC</p>
-      <div class="footer-links">
-        <a href="faq.html">FAQ</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-        <a href="privacy.html">Privacy</a>
-      </div>
-    </div>
-  </div>
-</footer>
+// ─── LAZY IMAGES ──────────────────────────────────────────────────
+if ('IntersectionObserver' in window) {
+  const lazyObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const img = e.target;
+        if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
+        lazyObs.unobserve(img);
+      }
+    });
+  }, { rootMargin: '200px 0px' });
+  document.querySelectorAll('img[data-src]').forEach(img => lazyObs.observe(img));
+}
 
-<a href="tel:7783870031" class="sticky-call" aria-label="Call Pinewood Electrical — (778) 387-0031">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-</a>
-<script src="static/main/app.js"></script>
+// ─── SMOOTH ANCHOR SCROLL ─────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function (e) {
+    const t = document.querySelector(this.getAttribute('href'));
+    if (t) {
+      e.preventDefault();
+      const top = t.getBoundingClientRect().top + scrollY - 82;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
 
-<button class="back-to-top" aria-label="Back to top" title="Back to top">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
-</body>
-</html>
+// ─── ANALYTICS: Phone & Email clicks ──────────────────────────────
+document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+  a.addEventListener('click', () => {
+    if (typeof gtag === 'function') gtag('event', 'phone_click', {
+      event_category: 'engagement',
+      event_label: a.href,
+      value: 1
+    });
+  });
+});
+
+document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
+  a.addEventListener('click', () => {
+    if (typeof gtag === 'function') gtag('event', 'email_click', {
+      event_category: 'engagement',
+      event_label: a.href
+    });
+  });
+});
+
+// ─── ANALYTICS: Sticky Call button ────────────────────────────────
+document.querySelectorAll('.sticky-call').forEach(a => {
+  a.addEventListener('click', () => {
+    if (typeof gtag === 'function') gtag('event', 'sticky_call_click', {
+      event_category: 'engagement',
+      event_label: 'Sticky Call Float Button',
+      value: 1
+    });
+  });
+});
+
+// ─── ANALYTICS: CTA button clicks ─────────────────────────────────
+document.querySelectorAll('.btn-gold, .btn-nav, [class*="cta"]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const label = btn.textContent.trim().substring(0, 50);
+    if (typeof gtag === 'function') gtag('event', 'cta_click', {
+      event_category: 'engagement',
+      event_label: label
+    });
+  });
+});
+
+// ─── ANALYTICS: Form submissions ──────────────────────────────────
+document.querySelectorAll('form').forEach(form => {
+  form.addEventListener('submit', () => {
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; btn.style.opacity = '0.65'; }
+    if (typeof gtag === 'function') gtag('event', 'form_submit', {
+      event_category: 'lead',
+      event_label: document.title,
+      value: 1
+    });
+  });
+});
+
+// ─── ANALYTICS: Scroll depth tracking ────────────────────────────
+(function () {
+  const depths = [25, 50, 75, 90];
+  const fired  = new Set();
+  window.addEventListener('scroll', () => {
+    const pct = Math.round(
+      (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+    );
+    depths.forEach(d => {
+      if (pct >= d && !fired.has(d)) {
+        fired.add(d);
+        if (typeof gtag === 'function') gtag('event', 'scroll_depth', {
+          event_category: 'engagement',
+          event_label: d + '%',
+          non_interaction: true
+        });
+      }
+    });
+  }, { passive: true });
+})();
+
+// ─── ANALYTICS: Time on page (30s, 60s, 120s milestones) ─────────
+(function () {
+  const milestones = [30, 60, 120];
+  milestones.forEach(sec => {
+    setTimeout(() => {
+      if (typeof gtag === 'function') gtag('event', 'time_on_page', {
+        event_category: 'engagement',
+        event_label: sec + 's',
+        non_interaction: true
+      });
+    }, sec * 1000);
+  });
+})();
+
+// ─── ANALYTICS: Outbound link clicks ──────────────────────────────
+document.querySelectorAll('a[href^="http"]').forEach(a => {
+  try {
+    if (new URL(a.href).hostname !== location.hostname) {
+      a.addEventListener('click', () => {
+        if (typeof gtag === 'function') gtag('event', 'outbound_click', {
+          event_category: 'engagement',
+          event_label: a.href
+        });
+      });
+    }
+  } catch(e) {}
+});
+
+// ─── ANALYTICS: Map / directions click ────────────────────────────
+document.querySelectorAll('a[href*="maps.google"]').forEach(a => {
+  a.addEventListener('click', () => {
+    if (typeof gtag === 'function') gtag('event', 'directions_click', {
+      event_category: 'engagement',
+      event_label: 'Google Maps directions'
+    });
+  });
+});
+
+// ─── STICKY CALL: hide near footer ───────────────────────────────
+(function () {
+  const stickyCall = document.querySelector('.sticky-call');
+  const footer     = document.querySelector('.site-footer');
+  if (!stickyCall || !footer) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      stickyCall.style.opacity    = e.isIntersecting ? '0' : '';
+      stickyCall.style.pointerEvents = e.isIntersecting ? 'none' : '';
+    });
+  }, { threshold: 0.1 });
+  obs.observe(footer);
+})();
+
+// ─── BACK TO TOP ──────────────────────────────────────────────────
+(function () {
+  const btn = document.querySelector('.back-to-top');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof gtag === 'function') gtag('event', 'back_to_top', { event_category: 'engagement' });
+  });
+})();
+
+// ─── HERO ENTRY ANIMATION ──────────────────────────────────────────
+(function () {
+  const heroLeft = document.querySelector('.hero-left');
+  if (!heroLeft) return;
+  const EASE = 'cubic-bezier(0.22,1,0.36,1)';
+  const els = heroLeft.querySelectorAll(
+    '.hero-badge,.hero-company-name,h1,.hero-desc,.hero-actions,.hero-stats'
+  );
+  // Set initial state synchronously before paint
+  els.forEach(el => {
+    el.style.cssText += ';opacity:0;transform:translateY(14px);';
+  });
+  // Animate on next frame — single rAF avoids the double-frame flash
+  requestAnimationFrame(() => {
+    els.forEach((el, i) => {
+      el.style.transition = `opacity 0.65s ${EASE}, transform 0.65s ${EASE}`;
+      el.style.transitionDelay = (80 + i * 90) + 'ms';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  });
+})();
+
+// ─── FORM VALIDATION (per-field on blur) ──────────────────────────
+(function () {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  function validateField(input) {
+    const group = input.closest('.form-group');
+    if (!group) return true;
+    if (input.hasAttribute('required') && !input.value.trim()) {
+      group.classList.add('field-error');
+      group.classList.remove('field-success');
+      let msg = group.querySelector('.field-error-msg');
+      if (!msg) {
+        msg = document.createElement('p');
+        msg.className = 'field-error-msg';
+        group.appendChild(msg);
+      }
+      msg.textContent = 'This field is required';
+      return false;
+    }
+    if (input.type === 'email' && input.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+      group.classList.add('field-error');
+      let msg = group.querySelector('.field-error-msg');
+      if (!msg) { msg = document.createElement('p'); msg.className = 'field-error-msg'; group.appendChild(msg); }
+      msg.textContent = 'Please enter a valid email address';
+      return false;
+    }
+    group.classList.remove('field-error');
+    group.classList.add('field-success');
+    const msg = group.querySelector('.field-error-msg');
+    if (msg) msg.remove();
+    return true;
+  }
+
+  form.querySelectorAll('input, select, textarea').forEach(field => {
+    field.addEventListener('blur', () => validateField(field));
+    field.addEventListener('input', () => {
+      if (field.closest('.form-group').classList.contains('field-error')) validateField(field);
+    });
+  });
+
+  // Intercept submit to show spinner and validate all fields
+  const origSubmit = form.onsubmit;
+  form.addEventListener('submit', function(e) {
+    const fields = form.querySelectorAll('input[required], select[required], textarea[required]');
+    let valid = true;
+    fields.forEach(f => { if (!validateField(f)) valid = false; });
+    if (!valid) { e.preventDefault(); e.stopImmediatePropagation(); return; }
+    const btn = document.getElementById('form-submit');
+    if (btn) btn.classList.add('btn-loading');
+  }, true);
+})();
+
+
+// ─── FOOTER COLLAPSIBLE COLUMNS ──────────────────────────────────
+(function () {
+  const toggles = document.querySelectorAll('.footer-col-toggle');
+  if (!toggles.length) return;
+
+  function isCollapsibleViewport() {
+    return window.innerWidth <= 640;
+  }
+
+  function setInitialState() {
+    toggles.forEach(btn => {
+      const bodyId = btn.getAttribute('aria-controls');
+      const body   = document.getElementById(bodyId);
+      if (!body) return;
+      const col    = btn.closest('.footer-col');
+
+      if (isCollapsibleViewport()) {
+        // Contact col opens by default; others closed
+        const isContact = bodyId === 'footer-contact';
+        btn.setAttribute('aria-expanded', isContact ? 'true' : 'false');
+        if (isContact) {
+          col.classList.add('open');
+        } else {
+          col.classList.remove('open');
+        }
+      } else {
+        // Desktop: all open, no toggle behaviour
+        btn.setAttribute('aria-expanded', 'true');
+        col.classList.add('open');
+      }
+    });
+  }
+
+  toggles.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!isCollapsibleViewport()) return; // no-op on desktop
+      const col  = btn.closest('.footer-col');
+      const open = col.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  setInitialState();
+
+  // Re-evaluate on resize (debounced)
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setInitialState, 120);
+  }, { passive: true });
+})();
+
+// ─── PERF MARK ────────────────────────────────────────────────────
+if (window.performance?.mark) window.performance.mark('app_ready');
