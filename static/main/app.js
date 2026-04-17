@@ -13,32 +13,39 @@ const hamburger = document.getElementById('hamburger');
 const mainNav   = document.getElementById('mainNav');
 
 if (hamburger && mainNav) {
-  hamburger.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    hamburger.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-  mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  const overlay = document.getElementById('nav-overlay');
+
+  function openNav() {
+    mainNav.classList.add('open');
+    if (overlay) overlay.classList.add('open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
     mainNav.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
     hamburger.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
-  }));
-  document.addEventListener('click', e => {
-    if (mainNav.classList.contains('open') && !mainNav.contains(e.target) && !hamburger.contains(e.target)) {
-      mainNav.classList.remove('open');
-      hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
+  }
+
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.contains('open') ? closeNav() : openNav();
   });
+
+  // Close when any nav link is tapped
+  mainNav.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', closeNav)
+  );
+
+  // Close when overlay is tapped
+  if (overlay) overlay.addEventListener('click', closeNav);
+
+  // Close on Escape key
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && mainNav.classList.contains('open')) {
-      mainNav.classList.remove('open');
-      hamburger.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+    if (e.key === 'Escape') closeNav();
   });
 }
 
