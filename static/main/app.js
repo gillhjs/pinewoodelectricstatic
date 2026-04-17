@@ -35,15 +35,12 @@ if (hamburger && mainNav) {
     mainNav.classList.contains('open') ? closeNav() : openNav();
   });
 
-  // Close when any nav link is tapped
   mainNav.querySelectorAll('a').forEach(a =>
     a.addEventListener('click', closeNav)
   );
 
-  // Close when overlay is tapped
   if (overlay) overlay.addEventListener('click', closeNav);
 
-  // Close on Escape key
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeNav();
   });
