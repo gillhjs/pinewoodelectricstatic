@@ -46,7 +46,15 @@
         <span class="logo-name-sub">Automation Ltd.</span>
       </div>
     </a>
-    <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="nav-right">
+      <a href="tel:7783870031" class="nav-phone nav-phone-desktop" aria-label="Call us">(778) 387-0031</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
       <a href="tel:7783870031" class="nav-phone-mobile" aria-label="Call (778) 387-0031"><span aria-hidden="true">📞</span> (778) 387-0031</a>
       <a href="index.html" class="nav-active">Home</a>
       <a href="services.html">Services</a>
@@ -58,14 +66,6 @@
       <a href="contact.html">Contact</a>
       <a href="contact.html" class="btn-nav">Get a Quote</a>
     </nav>
-    <div class="nav-right">
-      <a href="tel:7783870031" class="nav-phone nav-phone-desktop" aria-label="Call us">(778) 387-0031</a>
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</header>
 <div id="nav-overlay" aria-hidden="true"></div>
 
 <main id="main-content">
@@ -420,37 +420,67 @@
 <footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-grid">
-      <div>
+
+      <!-- Brand col — always visible -->
+      <div class="footer-brand">
         <img src="static/main/images/logo.png" alt="Pinewood Electrical Automation" class="footer-logo" width="130" height="30">
         <p class="footer-desc">Licensed electrical and industrial automation solutions built for reliability, code compliance, and long-term performance. Proudly serving Surrey and the Lower Mainland.</p>
       </div>
+
+      <!-- Services col — collapsible on mobile -->
       <div class="footer-col">
-        <h4>Services</h4>
-        <a href="plc-automation.html">PLC &amp; Automation</a>
-        <a href="control-panels.html">Control Panel Design</a>
-        <a href="electrical-upgrades.html">Electrical Upgrades</a>
-        <a href="ev-charger.html">EV Charger Installation</a>
-        <a href="maintenance.html">Maintenance &amp; Support</a>
-        <a href="residential.html">Residential Electrical</a>
+        <button class="footer-col-toggle" aria-expanded="false" aria-controls="footer-services">
+          <h4>Services</h4>
+          <span class="footer-col-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+          </span>
+        </button>
+        <div class="footer-col-body" id="footer-services">
+          <a href="plc-automation.html">PLC &amp; Automation</a>
+          <a href="control-panels.html">Control Panel Design</a>
+          <a href="electrical-upgrades.html">Electrical Upgrades</a>
+          <a href="ev-charger.html">EV Charger Installation</a>
+          <a href="maintenance.html">Maintenance &amp; Support</a>
+          <a href="residential.html">Residential Electrical</a>
+        </div>
       </div>
+
+      <!-- Company col — collapsible on mobile -->
       <div class="footer-col">
-        <h4>Company</h4>
-        <a href="about.html">About Us</a>
-        <a href="industries.html">Industries</a>
-        <a href="reviews.html">Reviews</a>
-        <a href="blog.html">Blog</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
-        <a href="privacy.html">Privacy Policy</a>
+        <button class="footer-col-toggle" aria-expanded="false" aria-controls="footer-company">
+          <h4>Company</h4>
+          <span class="footer-col-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+          </span>
+        </button>
+        <div class="footer-col-body" id="footer-company">
+          <a href="about.html">About Us</a>
+          <a href="industries.html">Industries</a>
+          <a href="reviews.html">Reviews</a>
+          <a href="blog.html">Blog</a>
+          <a href="faq.html">FAQ</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
       </div>
+
+      <!-- Contact col — always expanded (has phone/address) -->
       <div class="footer-col">
-        <h4>Contact</h4>
-        <p style="margin-bottom:0.5rem;">Pinewood Electrical and Automation Ltd.</p>
-        <a href="https://maps.google.com/?q=7358+148+Street+Surrey+BC" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">📍</span> 7358 148 St, Surrey, BC V3S 3E6</a>
-        <a href="tel:7783870031" class="footer-phone"><span aria-hidden="true">📞</span> (778) 387-0031</a>
-        <a href="mailto:pinewoodelectric@hotmail.com"><span aria-hidden="true">📧</span> pinewoodelectric@hotmail.com</a>
-        <p style="margin-top:0.5rem;"><span aria-hidden="true">🕓</span> By appointment · Emergency available</p>
+        <button class="footer-col-toggle" aria-expanded="true" aria-controls="footer-contact">
+          <h4>Contact</h4>
+          <span class="footer-col-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+          </span>
+        </button>
+        <div class="footer-col-body" id="footer-contact">
+          <p style="margin-bottom:0.5rem;">Pinewood Electrical and Automation Ltd.</p>
+          <a href="https://maps.google.com/?q=7358+148+Street+Surrey+BC" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">📍</span> 7358 148 St, Surrey, BC V3S 3E6</a>
+          <a href="tel:7783870031" class="footer-phone"><span aria-hidden="true">📞</span> (778) 387-0031</a>
+          <a href="mailto:pinewoodelectric@hotmail.com"><span aria-hidden="true">📧</span> pinewoodelectric@hotmail.com</a>
+          <p style="margin-top:0.5rem;"><span aria-hidden="true">🕓</span> By appointment · Emergency available</p>
+        </div>
       </div>
+
     </div>
   </div>
   <div class="footer-bottom">
